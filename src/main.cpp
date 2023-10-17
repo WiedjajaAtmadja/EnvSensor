@@ -116,7 +116,7 @@ void loop() {
   if (tNow - tLast > 1000) {
     tLast = tNow;
     digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
-    // Serial.printf("Hello World!\n");
+    Serial.printf("Hello World!\n");
     // rs485.printf("%03d Hello World!\r\n", nCount);
     // nCount++;
   }
