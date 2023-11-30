@@ -84,9 +84,9 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   delay(500);
   rs485.begin(4800, SWSERIAL_8N1, SW_UART_RXD, SW_UART_TXD, false, 64);
-  bool fInit = modbus.begin(&rs485);
-  modbus.master();
-  Serial.printf("ModbusRTU master init: %s\n",fInit?"OK":"Failed");
+  // bool fInit = modbus.begin(&rs485);
+  // modbus.master();
+  // Serial.printf("ModbusRTU master init: %s\n",fInit?"OK":"Failed");
 }
 
 void readSensorData()
@@ -110,20 +110,17 @@ void readSensorData()
 
 // int nCount=0;
 u_long tLast=0;
+int nCount=0;
 void loop() {
-  modbus.task();
+  // modbus.task();
   u_long tNow = millis();
   if (tNow - tLast > 1000) {
     tLast = tNow;
     digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
-    // Serial.printf("Hello World!\n");
-    // rs485.printf("%03d Hello World!\r\n", nCount);
-    // nCount++;
+    Serial.printf("%03d Hello World!\r\n", nCount);
+    rs485.printf("%03d Hello World!\r\n", nCount);
+    nCount++;
   }
   yield();
-  // Serial.printf("%03d Hello World!\n", nCount);
-  // rs485.printf("%03d Hello World!\r\n", nCount);
-  // nCount++;
-  // delay(1000);
 }
 
